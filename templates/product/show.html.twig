@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product {% endblock %}
+
+{% block body %}
+    <h1>{{product.name}}</h1>
+    
+    <p>{{product.description}}</p>
+    <p>{{product.isAvailable ? 'available' : 'unavailable'}}</p>
+    <p>Size: {{product.size}} </p>
+
+    {{ include("product/_categories.html.twig") }}
+{% if is_granted('ROLE_USER') %}
+    <a href="{{ path('product_edit', {'id': product.id}) }}">Edit</a>
+    <a href="{{ path('product_delete', {'id': product.id}) }}">Delete</a>
+{% endif %}
+
+{% endblock %}
